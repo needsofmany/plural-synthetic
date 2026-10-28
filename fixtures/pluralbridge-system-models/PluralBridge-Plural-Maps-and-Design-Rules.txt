@@ -1,0 +1,300 @@
+PLURALBRIDGE — TERMINOLOGY DICTIONARY (abbreviated for this document)
+---------------------------------------------------------------------
+
+TERMS
+
+Plural
+A person or collective whose plural structure is represented by a Plural Map.
+
+Plural Map
+A Plural Map describes how a plural understands their world.
+
+Object
+An entity represented in a Plural Map, including a System, Group, Place, or Member.
+
+Anchor
+An object that provides context for operations. Systems, Groups, and Places are anchors.
+
+Placement
+A relationship recording where an object appears in a Plural Map, including its parent anchor and ordering. An object may have multiple placements.
+
+Structural membership
+A relationship expressing that a member belongs to an anchor.
+
+Access membership
+A relationship associating an Account with an object for access purposes.
+
+Role
+The function or authority associated with participation in a relationship.
+
+Account
+A sign-in identity that can access objects through access membership. An Account is not a System.
+
+Focus
+The currently active anchor used as an operational context. Focus does not grant access.
+
+PLURAL MAP EXAMPLES
+-------------------
+
+These examples illustrate possible structures, not an exhaustive list of permitted configurations.
+Indentation illustrates placement or structural membership; annotations show other relationships or statuses.
+A member shown in multiple locations is the same member, not a duplicate.
+“Groups” is a collection heading in these diagrams, not an additional object type.
+
+1. Simple Single-System Plural Map
+A person signs in and has one System.
+
+Account
+├── System: The Harbor
+│   ├── Member: A
+│   ├── Member: B
+│   ├── Member: C
+│   └── Groups
+│       ├── Group: Dancers
+│       │   ├── Member: B
+│       │   └── Group: Ballet
+│       │       └── Member: A
+│       └── Group: Musicians
+│           ├── Member: A
+│           └── Member: C
+├── Notes
+└── Front history
+This is the simple default: one Account, one System anchor, members and groups inside it, and one focused anchor context.
+
+2. Multiple Top-Level Systems Plural Map
+A person has more than one root-level System. Neither root owns the other.
+
+Account
+├── System: The Harbor
+│   ├── Member: A
+│   ├── Member: B
+│   └── Groups
+│       └── Group: Harbor Group
+│           ├── Member: A
+│           └── Member: B
+├── System: The Observatory
+│   └── Member: C
+├── Notes
+└── Front history
+This supports two distinct top-level Systems. Both are root anchors because neither is placed beneath another anchor.
+
+3. Parent / Child Systems Plural Map
+One System contains a smaller child System.
+
+Account
+├── System: Main House
+│   ├── Member: Rowan
+│   ├── Member: Tess
+│   ├── Groups
+│   │   └── Group: Main House Group
+│   │       ├── Member: Rowan
+│   │       └── Member: Tess
+│   └── Child System: The Workshop
+│       ├── Member: Kit
+│       └── Member: Lark
+├── Notes
+└── Front history
+The parent / child placement describes structure. Access and privacy remain governed by access membership, roles, consent, and policy.
+
+4. Sibling Systems Plural Map
+Two Systems share a common relationship, but neither controls the other.
+
+Account
+├── System: Day Team (sibling)
+│   ├── Member: A
+│   ├── Member: B
+│   └── Groups
+│       └── Group: Day Team Group
+│           ├── Member: A
+│           └── Member: B
+├── System: Night Team (sibling)
+│   ├── Member: C
+│   └── Member: D
+├── Notes
+└── Front history
+This is useful for Systems that see themselves as parallel, cooperative, or operationally separate.
+
+5. Related Systems Plural Map
+Two Systems are related without a parent / child placement.
+
+Account
+├── System: The Archive (related)
+│   └── Member: C
+├── System: The Harbor (related)
+│   ├── Member: A
+│   ├── Member: B
+│   └── Groups
+│       └── Group: Harbor Group
+│           ├── Member: A
+│           └── Member: B
+├── Notes
+└── Front history
+This could represent shared history, partial overlap, a past structure, or a loosely connected internal organization.
+
+6. Subsystem / Nested Place Plural Map
+An internal cluster may have its own structure within a System, without requiring another System.
+
+Account
+├── System: The Harbor
+│   ├── Member: Alex
+│   ├── Member: Morgan
+│   ├── Member: Rae
+│   ├── Groups
+│   │   └── Group: Harbor Group
+│   │       ├── Member: Alex
+│   │       ├── Member: Morgan
+│   │       └── Member: Rae
+│   └── Place: Morgan's Room
+│       ├── Member: M1
+│       └── Member: M2
+├── Notes
+└── Front history
+
+A nested Place represents an internal cluster without forcing its members into a flat list or a separate System.
+
+7. Evolving / Uncertain Relationship Plural Map
+The user knows two structures are connected, and the exact relationship is still forming.
+
+Account
+├── System: North Wing (evolving, unknown)
+│   ├── Member: C
+│   └── Member: D
+├── System: The Harbor
+│   ├── Member: A
+│   ├── Member: B
+│   └── Groups
+│       └── Group: Harbor Group
+│           ├── Member: A
+│           └── Member: B
+├── Notes
+└── Front history
+This gives the user a way to preserve reality-in-progress without prematurely naming it.
+
+8. Archived System Plural Map
+A System or structure still matters historically, but is no longer active.
+
+Account
+├── System: Current System
+│   ├── Member: A
+│   ├── Member: B
+│   └── Groups
+│       └── Group: Current Group
+│           ├── Member: A
+│           └── Member: B
+├── System: Old Map (archived)
+│   ├── Member: Archive A
+│   ├── Member: Archive B
+│   └── Groups
+│       └── Group: Old Map Group
+│           ├── Member: Archive A
+│           └── Member: Archive B
+├── Notes
+└── Front history
+This helps preserve migration meaning, old fronting records, old notes, and past organization.
+
+9. Non-Tree / Graph Plural Map
+Some Systems may have overlapping or cross-linked relationships.
+
+Account
+├── System: A (related->B)
+│   ├── Member: A1
+│   ├── Member: A2
+│   └── Groups
+│       └── Group: A Group
+│           ├── Member: A1
+│           └── Member: A2
+├── System: B (sibling->C)
+│   └── Member: B1
+├── System: C (associated->A)
+│   └── Member: C1
+├── Notes
+└── Front history
+Relationship examples:
+
+A --related--> B
+B --sibling--> C
+C --associated--> A
+This breaks the ordinary tree assumption. The structure becomes a graph of relationships instead of a single trunk with branches.
+
+10. Group Collection of Systems Plural Map
+A top-level Group contains members and two Systems.
+
+Account
+├── Group: Household
+│   ├── Member: A
+│   ├── Member: E
+│   ├── Member: I
+│   ├── Member: O
+│   ├── System: The Harbor
+│   │   ├── Member: W
+│   │   └── Member: Y
+│   └── System: Main House
+│       ├── Member: X
+│       └── Member: Z
+├── Notes
+└── Front history
+A Group can serve as a root anchor and contain Systems without itself becoming a System.
+
+11. Place Collection of Systems Plural Map
+A top-level Place contains two Systems, one of which contains another Place.
+
+Account
+├── Place: Central Hub
+│   ├── System: The Harbor
+│   │   ├── Member: Popeye
+│   │   └── Member: Gilligan
+│   └── System: Main House
+│       └── Place: Waiting Room
+│           ├── Member: Mickey
+│           └── Member: Minnie
+├── Notes
+└── Front history
+A Place can serve as a root anchor or appear within another anchor.
+
+12. Non-System Anchors Plural Map
+A top-level Place contains Group and Place anchors, with no Systems anywhere in the structure.
+
+Account
+├── Place: Central Hub
+│   ├── Group: The Harbor
+│   │   ├── Member: Popeye
+│   │   └── Member: Gilligan
+│   └── Group: Main House
+│       └── Place: Waiting Room
+│           ├── Member: Mickey
+│           └── Member: Minnie
+├── Notes
+└── Front history
+Members can be organized through Groups and Places without requiring a System.
+
+DESIGN RULES
+------------
+
+These examples illustrate the following PluralBridge design rules, grouped by subject.
+
+1. Objects and Anchors
+- Object identity consists of object type + object ID.
+- Operations such as adding members require an anchor.
+- A root anchor has no parent anchor in its root placement; a Plural Map may have multiple root anchors.
+- An internal cluster can be represented using an appropriate anchor; it need not be a separate System.
+- Archived is an object status, not a relationship type.
+
+2. Placement, Membership, and Relationships
+- Placement records where an object appears; structural membership records where a member belongs.
+- An object may have multiple placements, and a member may belong to multiple anchors, without creating duplicate objects.
+- Parent / child placements describe containment. Sibling, related, associated, and evolving / uncertain relationships describe other connections.
+- Relationship arrows indicate direction; a relationship shown without an arrow may be represented by reciprocal directed records.
+
+3. Access, Authority, and Auditing
+- Access membership, roles, explicit permissions, consent, and policy govern access.
+- Placement, structural membership, and descriptive relationships do not themselves grant access, authority, or visibility.
+- Audit policy governs recording of activity.
+
+4. Focus and Fronting
+- Focus selects the active anchor context without creating access.
+- Fronting is modeled within the focused anchor context.
+
+5. Flexibility and Professional Use
+- The default user experience can remain simple while the underlying model supports varied structures, including those with no Systems.
+- Therapist-facing views should be user-controlled and privacy-aware.
+- Professional input can improve safety without overriding lived experience.

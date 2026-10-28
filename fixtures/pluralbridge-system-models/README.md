@@ -1,8 +1,10 @@
 # PluralBridge System-Model Fixtures
 
-This folder contains eleven self-contained PluralBridge system-model examples.
+This folder contains twelve self-contained PluralBridge system-model examples.
 They are implementations of `System Model Minimum Base.txt`, which is the
-authoritative specification.
+specification for the existing eleven examples. Example 12 follows
+`PluralBridge-Plural-Maps-and-Design-Rules.txt`, the current design reference.
+This addition preserves the existing eleven serialized examples unchanged.
 
 `generate.py` builds these configurations from Python topologies in
 `system_models.py`. It does not copy the JSON files into output. The committed
@@ -22,10 +24,18 @@ Files:
 - `example-009-non-tree-graph.json`: graph-style relationships across multiple systems
 - `example-010-top-level-group-containing-systems.json`: account-level group containing systems
 - `example-011-top-level-place-containing-systems.json`: account-level place containing systems and a nested place
+- `example-012-non-system-anchors.json`: root Place with Groups, a nested Place, and Members; no Systems
+
+Example 12 uses account placements for all four anchors, `groupMemberships` for
+Popeye and Gilligan, and `placeMemberships` for Mickey and Minnie. System-related
+collections and access memberships remain empty; placement and structural membership
+do not manufacture access grants. Notes and front history remain empty because the
+source supplies no events or note contents. This fixture tests structure, not login
+or authorization. No new schema fields are introduced.
 
 Shared modeling notes:
 
-- All eleven files use the same collection set. Unused collections are empty arrays.
+- All twelve files use the same collection set. Unused collections are empty arrays.
 - System access is explicit through `memberships`; relationship type does not imply access.
 - There is one membership record per unique account–System pair.
 - System context is explicit through `systemObjectLinks`; object ownership is not implied by nesting.
@@ -51,4 +61,3 @@ Model 6 encodes an internal cluster as a Place. `subsystem` remains listed among
 ### 3. Independent archive states of associated objects
 
 Archiving a System does not automatically change the lifecycle of its members, groups, notes, front history, or associations. Model 8 currently keeps per-object archive flags as independent facts. Open questions: which associated objects may be archived independently; how those flags are presented; and whether any later cascade or inheritance rule is wanted.
-
