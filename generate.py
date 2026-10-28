@@ -292,7 +292,7 @@ def check_system_model_fixtures(repo_root, out, generated_exports):
     src = Path(repo_root) / "fixtures" / "pluralbridge-system-models"
     mirror = Path(repo_root) / "sample-output" / "pluralbridge-system-models"
     expected = set(SYSTEM_MODEL_FIXTURE_NAMES)
-    for folder, docs in ((src, {"README.md", "System Model Minimum Base.txt", "PluralBridge-Plural-Maps-and-Design-Rules.txt"}), (mirror, {"README.md"})):
+    for folder, docs in ((src, {"README.md", "PluralBridge-Plural-Maps-and-Design-Rules.txt"}), (mirror, {"README.md"})):
         found = {p.relative_to(folder).as_posix() for p in folder.rglob("*") if p.is_file()}
         assert found == expected | docs, \
             f"{folder.relative_to(repo_root)}: unexpected {sorted(found - expected - docs)}, missing {sorted(expected - found)}"

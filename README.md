@@ -50,9 +50,9 @@ you can commit it as test fixtures and diff it in review.
 
 The repository includes twelve PluralBridge system-model examples in
 [`sample-output/pluralbridge-system-models/`](sample-output/pluralbridge-system-models).
-They follow [`fixtures/pluralbridge-system-models/System Model Minimum Base.txt`](fixtures/pluralbridge-system-models/System%20Model%20Minimum%20Base.txt)
-and share one collection schema. Unused collections are empty arrays.
-Example 12 follows [`PluralBridge-Plural-Maps-and-Design-Rules.txt`](fixtures/pluralbridge-system-models/PluralBridge-Plural-Maps-and-Design-Rules.txt).
+The authoritative specification is
+[`PluralBridge-Plural-Maps-and-Design-Rules.txt`](fixtures/pluralbridge-system-models/PluralBridge-Plural-Maps-and-Design-Rules.txt).
+All twelve examples share one collection schema. Unused collections are empty arrays.
 The existing eleven examples retain their established encoding and output.
 
 They cover:

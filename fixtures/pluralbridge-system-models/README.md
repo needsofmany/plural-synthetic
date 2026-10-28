@@ -1,10 +1,8 @@
 # PluralBridge System-Model Fixtures
 
 This folder contains twelve self-contained PluralBridge system-model examples.
-They are implementations of `System Model Minimum Base.txt`, which is the
-specification for the existing eleven examples. Example 12 follows
-`PluralBridge-Plural-Maps-and-Design-Rules.txt`, the current design reference.
-This addition preserves the existing eleven serialized examples unchanged.
+The authoritative specification is `PluralBridge-Plural-Maps-and-Design-Rules.txt`.
+The existing eleven serialized examples remain unchanged.
 
 `generate.py` builds these configurations from Python topologies in
 `system_models.py`. It does not copy the JSON files into output. The committed
