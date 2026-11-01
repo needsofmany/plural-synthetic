@@ -94,7 +94,9 @@ Account
 │       └── Member: Lark
 ├── Notes
 └── Front history
-The parent / child placement describes structure. Access and privacy remain governed by access membership, roles, consent, and policy.
+The parent / child relationship describes structure. Access and privacy remain governed by access membership, roles, consent, and policy.
+
+Encoding: The Workshop is the source of a systemRelationships record with relationshipType child and parentSystemId identifying Main House. targetSystemId is null. This canonical example encodes the child connection as a graph relationship; it does not add a placement for The Workshop or a reverse parent record. Access membership is separate and is not inherited through this relationship.
 
 4. Sibling Systems Plural Map
 Two Systems share a common relationship, but neither controls the other.
@@ -131,6 +133,8 @@ Account
 └── Front history
 This could represent shared history, partial overlap, a past structure, or a loosely connected internal organization.
 
+Encoding: related is a directed graph record (systemId -> targetSystemId). It is not parent/child and does not grant access. Both Systems are labeled (related) with no arrow, so encode two records: The Archive related -> The Harbor, and The Harbor related -> The Archive.
+
 6. Subsystem / Nested Place Plural Map
 An internal cluster may have its own structure within a System, without requiring another System.
 
@@ -152,6 +156,10 @@ Account
 
 A nested Place represents an internal cluster without forcing its members into a flat list or a separate System.
 
+Encoding: Harbor is the only System. Morgan's Room is a Place contained in Harbor (systemObjectPlacements, parent = Harbor). Alex, Morgan, and Rae are Harbor members and Harbor Group members. M1 and M2 belong to the Place (placeMemberships) and are not Harbor System members. The name "Morgan's Room" is a label. This example does not record a member-to-Place association and does not set associatedObjectId.
+
+Model 6 uses the Place structure shown in its diagram. The permitted endpoints and associated-object semantics of the subsystem relationship remain a separate specification question.
+
 7. Evolving / Uncertain Relationship Plural Map
 The user knows two structures are connected, and the exact relationship is still forming.
 
@@ -169,6 +177,8 @@ Account
 ├── Notes
 └── Front history
 This gives the user a way to preserve reality-in-progress without prematurely naming it.
+
+Encoding: North Wing and The Harbor are both root Systems. Encode one directed graph record: relationshipType evolving, systemId = North Wing, targetSystemId = The Harbor, relationshipStatus unknown. Do not name the connection as parent, child, sibling, related, subsystem, or ownership. unknown is the status of that evolving record, not a separate relationship type.
 
 8. Archived System Plural Map
 A System or structure still matters historically, but is no longer active.
@@ -191,6 +201,10 @@ Account
 ├── Notes
 └── Front history
 This helps preserve migration meaning, old fronting records, old notes, and past organization.
+
+Encoding: Old Map is a root System that is no longer active. Encode lifecycle on that System: status archived, isArchived true. Current System remains status active, isArchived false. Both Systems remain relationshipType root. This example does not include a predecessor or other graph edge between Old Map and Current System.
+
+Historical meaning is preserved by retaining Old Map and its existing members, groups, notes, front history, and associations. Archiving the System does not automatically change the lifecycle state of those associated objects. Per-object archive flags on those associated records are independent facts, not an automatic cascade.
 
 9. Non-Tree / Graph Plural Map
 Some Systems may have overlapping or cross-linked relationships.
@@ -215,6 +229,8 @@ A --related--> B
 B --sibling--> C
 C --associated--> A
 This breaks the ordinary tree assumption. The structure becomes a graph of relationships instead of a single trunk with branches.
+
+Encoding: encode exactly the three directed edges drawn here, plus a root record for each System: A related -> B, B sibling -> C, C associated -> A. Do not add B related -> A, C sibling -> B, or A associated -> C. Reciprocal records are used only where a diagram labels both sides with no arrow.
 
 10. Group Collection of Systems Plural Map
 A top-level Group contains members and two Systems.
@@ -283,7 +299,7 @@ These examples illustrate the following PluralBridge design rules, grouped by su
 - Placement records where an object appears; structural membership records where a member belongs.
 - An object may have multiple placements, and a member may belong to multiple anchors, without creating duplicate objects.
 - Parent / child placements describe containment. Sibling, related, associated, and evolving / uncertain relationships describe other connections.
-- Relationship arrows indicate direction; a relationship shown without an arrow may be represented by reciprocal directed records.
+- Relationship arrows indicate direction. For these canonical examples, two Systems labeled with the same peer relationship and no arrow use two reciprocal directed records; a single arrow uses one directed record.
 
 3. Access, Authority, and Auditing
 - Access membership, roles, explicit permissions, consent, and policy govern access.
@@ -298,3 +314,27 @@ These examples illustrate the following PluralBridge design rules, grouped by su
 - The default user experience can remain simple while the underlying model supports varied structures, including those with no Systems.
 - Therapist-facing views should be user-controlled and privacy-aware.
 - Professional input can improve safety without overriding lived experience.
+
+
+CANONICAL JSON ENCODING
+-----------------------
+
+These field-level conventions describe the serialized canonical examples. They preserve the established encoding of Examples 1–11 while Example 12 demonstrates anchors with no Systems.
+
+Encoding convention for these canonical examples
+
+Graph records are directed. systemId is the source. Named peer associations use targetSystemId. Parent/child uses parentSystemId on the child record (relationshipType child).
+
+When a diagram labels two Systems with the same peer type and draws no arrow, encode two directed records, one in each direction. When a diagram draws a single arrow (X --type--> Y), encode one directed record.
+
+relationshipStatus is a state of a graph record. For Model 7 the established status token is unknown.
+
+Archived is a System lifecycle state (status archived, isArchived true), not a graph relationship type. Model 8 does not include a predecessor edge.
+
+Containment uses placements. Member-in-group and member-in-place use membership collections. Access uses memberships. None of these is implied by a graph relationship.
+
+A root record in systemRelationships identifies a System with no parent System relationship. Its parentSystemId and targetSystemId are null. This serialized root marker is separate from a root anchor placement: in Examples 10 and 11, Systems retain root records while being placed beneath a Group or Place.
+
+relationshipStatus remains optional. Model 7 uses unknown; broader use of statuses across relationship types is deferred. No additional tables, catalogs, or type/status rules are introduced.
+
+Model 6 retains its Place encoding. The permitted endpoints and associated-object semantics of subsystem remain deferred.
